@@ -6,6 +6,10 @@ name = "pypi"
 [packages]
 django = "*"
 pipenv = "*"
+psycopg2 = "*"
+psycopg2-binary = "*"
+pillow = "*"
+django-allauth = "==0.51.0"
 
 [dev-packages]
 

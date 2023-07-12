@@ -1,10 +1,50 @@
-<!DOCTYPE html>
+{% load static %}
+{% load socialaccount %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="{% static 'stile.css'%}">
 </head>
 <body>
-123
+<header class="header">
+  <h1 class="logo">Логотип</h1>
+  <nav class="navigation">
+    <ul>
+      <li><a href="#">Главная</a></li>
+      <li><a href="#">Статьи</a></li>
+      <li><a href="#">О нас</a></li>
+      {% if user.is_authenticated %}
+      <li><a href="{% url 'logout'  %}"> Выход </a></li>
+      <br>
+      <li><a> {{user.first_name}} {{user.last_name}} </a></li>
+      {% else %}
+      <li><a  href="{% provider_login_url 'vk' method='oauth2' %}"><h5>Вход</h5></a></li>
+      <li><a href="{% url 'registr'%}">Регистрация</a></li>
+      {% endif %}
+      {% if user.is_superuser %}
+      <li><a href="/admin">Админ панель</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+</header>
+{% for article in articles %}
+<div class="article">
+  <div class="article-header">
+    <h2 class="article-title"><a href="{% url 'detail' article.pk %}"> {{article.title}}</a></h2>
+    {% if article.image %}
+    <img class="article-image" src="{{article.image.url}}" alt="Изображение статьи">
+    {% else %}
+    нету фото
+    {% endif%}
+  </div>
+  <div class="article-content">
+    <p>{{article.content}}</p>
+  </div>
+</div>
+{% endfor %}
+<footer class="footer">
+  <p>&copy; 2023 Все права защищены</p>
+</footer>
 </body>
 </html>

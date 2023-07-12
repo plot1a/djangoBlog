@@ -1,0 +1,34 @@
+{% load static %}
+<html>
+<head>
+    <title>Детальный просмотр статьи</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'stile.css'%}">
+</head>
+<body>
+<div class="container">
+    <h4 class="on_main"><a href="{% url 'home' %}">На главную</a></h4>
+    <h1 class="detail_title">{{ item.title }}</h1>
+    <div class="article-info">
+        <img src="{{ item.image.url }}" alt="{{ item.title }}">
+        <p class="date">Дата создания: {{ item.created_at }} </p><br>
+    </div>
+    <h4>Автор: {{ item.author.first_name }} {{ item.author.last_name }} <button class="like-button">Лайк</button></h4>
+    <div class="content">
+        <p>{{ item.content }}</p>
+    </div>
+    <div class="comments">
+        <h2>Комментарии</h2>
+        <br>
+        <form class="comment-form" action="#" method="POST">
+            <textarea name="comment" placeholder="Введите комментарий"
+                      required></textarea>
+            <button type="submit">Отправить</button>
+
+        </form>
+        <div class="comment-list">
+            <!-- Здесь будет список комментариев -->
+        </div>
+    </div>
+</div>
+</body>
+</html>

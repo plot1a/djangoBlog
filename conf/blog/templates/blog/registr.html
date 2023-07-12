@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<form action="{% url 'registr' %}" method="post">
+     {% csrf_token %}
+    <div class="auth.registr">
+        <input placeholder="ввидите логин" type="text" name="username" required>
+        <br>
+        <input placeholder="ввидите пароль" type="password" name="password" required>
+        <br>
+        <input placeholder="ввидите email" type="email" name="email" required>
+        <button>Зарегистрироваться</button>
+    </div>
+       {% if error %}
+    <p style="color: red">{{error}}</p>
+    {% endif %}
+    <br>
+    <div class="adw"><p>
+        Lorem ipsum dolor sit.
+    </p></div>
+</form>
+</body>
+</html>
