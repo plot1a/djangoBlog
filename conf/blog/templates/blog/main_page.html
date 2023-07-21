@@ -17,7 +17,10 @@
       {% if user.is_authenticated %}
       <li><a href="{% url 'logout'  %}"> Выход </a></li>
       <br>
-      <li><a> {{user.first_name}} {{user.last_name}} </a></li>
+      <li>
+        <a> {{user.first_name}} {{user.last_name}} </a>
+        <img src="{{user.photo.url}}" alt="">
+      </li>
       {% else %}
       <li><a  href="{% provider_login_url 'vk' method='oauth2' %}"><h5>Вход</h5></a></li>
       <li><a href="{% url 'registr'%}">Регистрация</a></li>

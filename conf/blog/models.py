@@ -25,10 +25,10 @@ class User(AbstractUser):
 
     username = models.CharField(
         max_length=150,
-
         verbose_name="Username",
         unique=True,
     )
+    photo = models.ImageField(upload_to='user/', verbose_name='Фото')
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
