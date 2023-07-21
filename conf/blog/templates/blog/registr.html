@@ -8,6 +8,7 @@
 <body>
 <form action="{% url 'registr' %}" method="post">
      {% csrf_token %}
+
     <div class="auth.registr">
         <input placeholder="ввидите логин" type="text" name="username" required>
         <br>
@@ -21,7 +22,6 @@
     {% endif %}
     <br>
     <div class="adw"><p>
-        Lorem ipsum dolor sit.
     </p></div>
 </form>
 </body>

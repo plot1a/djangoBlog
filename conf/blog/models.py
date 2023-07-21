@@ -56,3 +56,18 @@ class Like(models.Model):
         verbose_name = 'Like'
         verbose_name_plural = 'Likes'
         unique_together = ['user', 'article']
+
+
+class Comment(models.Model):
+    user = models.ForeignKey('User', on_delete=models.CASCADE, verbose_name='Коментаторы')
+    content = models.CharField(max_length=150, verbose_name='Коментарий')
+    article = models.ForeignKey('Article', on_delete=models.CASCADE, verbose_name='Статья')
+
+    def __str__(self):
+        return f'{self.user.username}, {self.content}'
+
+    class Meta:
+        db_table = 'comment'
+        app_label = 'blog'
+        verbose_name = 'Comment'
+        verbose_name_plural = 'Comments'

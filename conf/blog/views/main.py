@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, logout
 from django.shortcuts import render, redirect
 from django.views import View
-from blog.models import Article, User
+from blog.models import Article, User, Like, Comment
 
 
 class RenderMainPageView(View):
@@ -53,3 +53,27 @@ class UserLogoutView(View):
     def get(self, request, *args, **kwargs):
         logout(request)
         return redirect('home')
+
+
+class LikeCreateViews(View):
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        article = Article.objects.get(pk=int(request.POST['article']))
+        if request.POST.get('like'):
+            like = Like.objects.get(
+                user=user,
+                article=article
+            )
+            like.delete()
+        else:
+            like = Like.objects.create(
+                user=user,
+                article=article)
+        return redirect('detail', int(request.POST['article']))
+
+
+class CommentsCreateViews(View):
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        article = Article.objects.get(pk=request)
+        comments = Comment.objects.get(pk=request.POST['comments'])
