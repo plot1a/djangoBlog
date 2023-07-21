@@ -1,4 +1,5 @@
 {% load static %}
+{% load filter %}
 <html>
 <head>
     <title>Детальный просмотр статьи</title>
@@ -12,14 +13,38 @@
         <img src="{{ item.image.url }}" alt="{{ item.title }}">
         <p class="date">Дата создания: {{ item.created_at }} </p><br>
     </div>
-    <h4>Автор: {{ item.author.first_name }} {{ item.author.last_name }} <button class="like-button">Лайк</button></h4>
+
+     {% if user.is_authenticated  %}
+
+    <form action="{% url 'like' %}" method="post">
+        <input type="hidden" value="{{item.pk}}" name="article">
+        {% csrf_token %}
+        {% if item|check_like:user %}
+        <h4>
+        Автор: {{ item.author.first_name }} {{ item.author.last_name }} <button  style="background-color: #cb000a" class="like-button">Лайк</button>
+    </h4>
+        <input type="hidden" name="like" value="1">
+        {% else %}
+        <h4>Автор: {{ item.author.first_name }} {{ item.author.last_name }}
+            <button class="like-button">Лайк</button>
+        </h4>
+        {% endif %}
+    </form>
+
+
+    {% else %}
+    <h4>Автор: {{ item.author.first_name }} {{ item.author.last_name }} <button disabled class="like-button">Лайк</button></h4>
+    {% endif %}
+
     <div class="content">
+
+
         <p>{{ item.content }}</p>
     </div>
     <div class="comments">
         <h2>Комментарии</h2>
         <br>
-        <form class="comment-form" action="#" method="POST">
+        <form class="comment-form" action="{% url 'comments' item.id %}" method="POST">
             <textarea name="comment" placeholder="Введите комментарий"
                       required></textarea>
             <button type="submit">Отправить</button>
