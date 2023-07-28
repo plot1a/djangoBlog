@@ -32,6 +32,7 @@ class User(AbstractUser):
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
+    photo = models.ImageField(upload_to='user/', verbose_name='Фото')
 
     def __str__(self):
         return self.username
