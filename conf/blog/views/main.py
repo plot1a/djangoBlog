@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, logout
+from django.db.models import Count
 from django.shortcuts import render, redirect
 from django.views import View
 from blog.models import Article, User, Like, Comment
@@ -15,7 +16,11 @@ class RenderMainPageView(View):
 class ArticleDetailView(View):
     def get(self, request, *args, **kwargs):
         article = Article.objects.get(id=kwargs['pk'])
-        return render(request, 'blog/detail_page.html', context={'item': article})
+        comments = article.comment_set.all().order_by('-id')
+        for comment in comments:
+            comment.has_deleted = True if request.user.is_authenticated and request.user == comment.user else False
+
+        return render(request, 'blog/detail_page.html', context={'item': article, 'comments': comments}, )
 
 
 class AuthRenderView(View):
@@ -72,8 +77,19 @@ class LikeCreateViews(View):
         return redirect('detail', int(request.POST['article']))
 
 
-class CommentsCreateViews(View):
+class CommentCreateDeleteView(View):
     def post(self, request, *args, **kwargs):
-        user = request.user
-        article = Article.objects.get(pk=request)
-        comments = Comment.objects.get(pk=request.POST['comments'])
+        Comment.objects.create(
+            user=request.user,
+            article=Article.objects.get(pk=kwargs['article_pk']),
+            content=request.POST['comment']
+        )
+        return redirect('detail', kwargs['article_pk'])
+    def get(self, request, *args, **kwargs):
+        comment = Comment.objects.get(pk=kwargs['comment_pk'])
+        article_pk = comment.article.pk
+        comment.delete()
+        return redirect('detail', article_pk)
+
+
+

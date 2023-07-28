@@ -4,6 +4,7 @@ from django.core.files.base import ContentFile
 from allauth.account.signals import user_logged_in
 from django.http import HttpResponse
 
+
 from blog.models import User
 
 
@@ -14,5 +15,5 @@ def social_signal(request, user, **kwargs):
     response = requests.get(list_data['photo'])
     User.objects.get(username=list_data['screen_name']).photo.save(name, ContentFile(response.content), save=True)
 
-
 user_logged_in.connect(social_signal)
+
