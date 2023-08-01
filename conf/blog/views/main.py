@@ -8,9 +8,12 @@ from blog.models import Article, User, Like, Comment
 class RenderMainPageView(View):
     def get(self, request, *args, **kwargs):
         articles = Article.objects.all()
+        if request.GET.get('search'):
+            articles = articles.filter(title__icontains=request.GET.get('search'))
         return render(request, "blog/main_page.html", context={
             'articles': articles
         })
+
 
 
 class ArticleDetailView(View):
@@ -85,11 +88,39 @@ class CommentCreateDeleteView(View):
             content=request.POST['comment']
         )
         return redirect('detail', kwargs['article_pk'])
+
     def get(self, request, *args, **kwargs):
         comment = Comment.objects.get(pk=kwargs['comment_pk'])
         article_pk = comment.article.pk
         comment.delete()
         return redirect('detail', article_pk)
+
+
+class UserCabinetRenderView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'blog/kabinet.html')
+
+
+class ArticleRenderCreateView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'blog/create_article.html')
+
+    def post(self, request, *args, **kwargs):
+        article = Article.objects.create(
+            author=request.user,
+            image=request.FILES.get('photo'),
+            title=request.POST.get('title'),
+            content=request.POST.get('content')
+        )
+
+        return redirect('detail', article.pk)
+class ArticleDeleteView(View):
+    def get(self, request, *args, **kwargs):
+        Article.objects.get(pk=kwargs['article__pk']).delete()
+        return redirect('home')
+
+
+
 
 
 

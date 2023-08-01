@@ -1,14 +1,16 @@
+{% extends 'blog/base.html' %}
 {% load static %}
 {% load filter %}
-<html>
-<head>
-    <title>Детальный просмотр статьи</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'stile.css'%}">
-</head>
-<body>
+{% block link %}
+<link rel="stylesheet" href="{% static 'stile.css' %}">
+{% endblock  %}
+{% block content %}
 <div class="container">
     <h4 class="on_main"><a href="{% url 'home' %}">На главную</a></h4>
     <h1 class="detail_title">{{ item.title }}</h1>
+    {% if item.author == user %}
+    <a href="{% url 'article_delete' item.pk %}">X</a>
+    {% endif %}
     <div class="article-info">
         <img src="{{ item.image.url }}" alt="{{ item.title }}">
         <p class="date">Дата создания: {{ item.created_at }} </p><br>
@@ -65,12 +67,14 @@
                 <a href="{% url 'comment_delete' comment.id %}">___________________________________X</a>
                 {% endif %}
                 <br>
-                <img style="height: 50px; width: 50px" src="{{comment.user.photo.url}}" alt=""> {{ comment.user.last_name }} {{ comment.user.first_name }}<br>
+                <img style="height: 50px; width: 50px" src="{{comment.user.photo.url}}" alt="">
+                {{ comment.user.last_name }} {{ comment.user.first_name }}<br>
                 <br>
             </div>
             {% endfor %}
         </div>
     </div>
 </div>
-</body>
-</html>
+{% endblock  %}
+
+
