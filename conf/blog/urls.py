@@ -1,6 +1,7 @@
 from django.urls import path
 from blog.views.main import (RenderMainPageView, ArticleDetailView, AuthRenderView,
-                                                 RegistrRenderView, UserLogoutView, LikeCreateViews, CommentCreateDeleteView)
+                             RegistrRenderView, UserLogoutView, LikeCreateViews, CommentCreateDeleteView,
+                             UserCabinetRenderView, ArticleRenderCreateView, ArticleDeleteView)
 
 urlpatterns = [
     path('', RenderMainPageView.as_view(), name='home'),
@@ -10,6 +11,9 @@ urlpatterns = [
     path('logout/', UserLogoutView.as_view(), name='logout'),
     path('likes/', LikeCreateViews.as_view(), name='like'),
     path('articles/<int:article_pk>/comments/', CommentCreateDeleteView.as_view(), name='comments'),
-    path('comments/<int:comment_pk>/', CommentCreateDeleteView.as_view(), name='comment_delete')
+    path('comments/<int:comment_pk>/', CommentCreateDeleteView.as_view(), name='comment_delete'),
+    path('users/', UserCabinetRenderView.as_view(), name='user'),
+    path('articles/', ArticleRenderCreateView.as_view(), name='article'),
+    path('articles/<int:article__pk>/', ArticleDeleteView.as_view(), name='article_delete'),
 
 ]

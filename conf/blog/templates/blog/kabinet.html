@@ -1,0 +1,26 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block link %}
+<link rel="stylesheet" href="{% static 'stile.css' %}">
+{% endblock %}
+{% block content %}
+<div class="user_container">
+    <div class="profile">
+      <div class="profile-picture">
+        <img src="{{ user.photo.url }}" alt="Фото пользователя">
+      </div>
+      <div class="profile-info">
+        <h2>{{user.first_name}} {{ user.last_name }}</h2>
+        <p>@{{ user.username }}</p>
+        <div class="likes-comments">
+          <p>Лайков: 100</p>
+          <p>Комментариев: 50</p>
+        </div>
+        <p class="about-user">
+          {{ user.about_me }}
+        </p>
+        <button class="add-article"><a href="{% url 'article' %}">Добавить статью</a></button>
+      </div>
+    </div>
+  </div>
+{% endblock %}

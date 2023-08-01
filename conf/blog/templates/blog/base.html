@@ -1,0 +1,55 @@
+{% load static %}
+{% load socialaccount %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% block link %}
+    {% endblock %}
+</head>
+<body>
+<header class="header">
+    <h1 class="logo">Логотип</h1>
+    <nav class="navigation">
+        <div class="headers">
+            <div class="left_header">
+                <ul>
+                    <li><a href="#">Главная</a></li>
+                    <li><a href="#">Статьи</a></li>
+                    <li><a href="#">О нас</a></li>
+                </ul>
+            </div>
+            <div class="right_header">
+                <ul>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'user' %}"> <img src="{{user.photo.url}}" alt=""> {{user.first_name}}
+                        {{user.last_name}} </a></li>
+                    <li><a href="{% url 'logout'  %}"> Выход </a></li>
+                    {% else %}
+                    <li><a href="{% provider_login_url 'vk' method='oauth2' %}"><h5>Вход</h5></a></li>
+                    <li><a href="{% url 'registr'%}">Регистрация</a></li>
+                    {% endif %}
+                    {% if user.is_superuser %}
+                    <li><a href="/admin">Админ панель</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+    <form action="{% url 'home' %}">
+        <div class="search" style="display: inline-flex; width: 100%">
+
+        <input name="search" style="width: 50%" placeholder="Ввидите название" type="text">
+        <button>Поиск</button>
+        </div>
+    </form>
+
+{% block content %}
+{% endblock %}
+<footer class="footer">
+    <p>&copy; 2023 Все права защищены</p>
+</footer>
+</body>
+</html>
