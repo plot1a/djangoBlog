@@ -1,0 +1,140 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DotaHook</title>
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Lora&family=Nunito&family=Ysabeau&display=swap"
+          rel="stylesheet">
+</head>
+<body>
+<div class="header">
+    <div class="left_header">
+        <a href="{% url 'home' %}"><img class="header_logo"
+             src="{% static 'img/[CITYPNG.COM]HD Dota 2 Logo White Text With Symbol PNG - 2000x2000.png'%}" alt=""></a>
+    </div>
+    <div class="right_header">
+        <div class="header_item">
+            <a href="{% url 'list_articles'%}" class="header_text"><p>Статьи</p></a>
+        </div>
+        <div class="header_item">
+            <a href="" class="header_text"><p>О нас</p></a>
+        </div>
+        <div class="header_item">
+            <a href="" class="header_text"><p>Вход</p></a>
+        </div>
+    </div>
+</div>
+<div class="main_block">
+    <div class="main_left">
+        <div class="left_title">
+            <h1 class="title_logo">DotaHook</h1>
+        </div>
+        <div class="left_content">
+            <p class="inner_content">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur ex fugiat quo
+                repudiandae sequi! Accusantium aliquam autem, cum eaque eum facere labore nulla rem repellendus unde,
+                velit veritatis voluptates, voluptatibus. Atque dolorem ipsam maiores nihil praesentium. Alias cum eius
+                praesentium?</p>
+        </div>
+    </div>
+    <div class="main_right">
+        <div class="right_hero">
+            <div class="hero_name">
+
+            </div>
+            <div class="hero_image">
+                <img class="inner_image" src="{% static 'img/pngwing.com.png'%}" alt="">
+            </div>
+        </div>
+        <div class="right_spel">
+            <div class="spel_item">
+                <div class="cart_item">
+                    ТИП РАЗВЕИВАНИЯ: сильное
+                    СПОСОБНОСТЬ:
+                    ненаправленная
+                    ТИП УРОНА:
+                    магический
+                    СКВОЗЬ НЕВОСПР. К МАГИИ:
+                    нет
+                    ЗАДЕРЖКА:
+                    1.5
+                    РАДИУС:
+                    325.0
+                    УРОН:
+                    75.0 / 150.0 / 225.0 / 300.0
+                    ПЕРЕЗАРЯДКА: 9.0 / 8.0 / 7.0 / 6.0
+                    МАНА: 65
+                </div>
+                <img class="sple_img" src="{% static 'img/slark_dark_pact.png' %}" alt="">
+            </div>
+            <div class="spel_item">
+                <div class="cart_item">
+                    СПОСОБНОСТЬ:
+                    ненаправленная
+                    ТИП УРОНА:
+                    магический
+                    СКВОЗЬ НЕВОСПР. К МАГИИ:
+                    нет
+                    МОЖНО РАЗВЕЯТЬ:
+                    нет
+                    ДАЛЬНОСТЬ:
+                    700.0
+                    ДЛИТЕЛЬНОСТЬ ПРИВЯЗКИ:
+                    2.5 / 2.8 / 3.0 / 3.3
+                    РАДИУС ПРИВЯЗКИ:
+                    400.0
+                    ЗАРЯДОВ:
+                    2.0
+                    БАЗОВОЕ ВРЕМЯ ВОССТАНОВЛЕНИЯ ЗАРЯДА:
+                    10.0
+                    ДАЛЬНОСТЬ:
+                    1000.0
+                    ЭФФЕКТЫ ESSENCE SHIFT:
+                    0.0 / 1.0 / 2.0 / 3.0
+                    ПЕРЕЗАРЯДКА:22.0 / 18.0 / 14.0 / 10.0
+                    МАНА:75
+                </div>
+                <img class="sple_img" src="{% static 'img/slark_essence_shift.png' %}" alt="">
+            </div>
+            <div class="spel_item">
+                <div class="cart_item">
+                    СПОСОБНОСТЬ:
+                    пассивная
+                    СКВОЗЬ НЕВОСПР. К МАГИИ:
+                    да
+                    МОЖНО РАЗВЕЯТЬ:
+                    нет
+                    ДАЁТ ЛОВКОСТИ:
+                    3.0
+                    ЗАБИРАЕТ ХАРАКТЕРИСТИК:
+                    1.0
+                    ДЛИТЕЛЬНОСТЬ:
+                    20.0 / 40.0 / 60.0 / 80.0
+                </div>
+                <img class="sple_img" src="{% static 'img/slark_pounce.png' %}" alt="">
+            </div>
+            <div class="spel_item">
+                <div class="cart_item">
+                    СПОСОБНОСТЬ:
+                    ненаправленная
+                    МОЖНО РАЗВЕЯТЬ:
+                    нет
+                    ДЛИТЕЛЬНОСТЬ:
+                    4.0 / 4.3 / 4.5
+                    ДОП. СКОРОСТЬ ПЕРЕДВИЖЕНИЯ:
+                    24.0% / 36.0% / 48.0%
+                    ВОССТАНОВЛЕНИЕ ЗДОРОВЬЯ В СЕКУНДУ:
+                    60.0 / 90.0 / 120.0
+                    ПЕРЕЗАРЯДКА:75.0 / 60.0 / 45.0
+                    МАНА:120
+                </div>
+                <a href=""><img class="sple_img" src="{% static 'img/slark_shadow_dance.png' %}" ></a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

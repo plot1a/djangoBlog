@@ -12,3 +12,10 @@ def check_like(obj, value):
         user=value
 
     )
+
+
+@register.filter
+def check_len(obj):
+    if len(obj) > 400:
+        return obj[:400]+"..."
+    return obj

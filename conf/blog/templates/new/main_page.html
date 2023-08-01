@@ -1,0 +1,61 @@
+{% load static %}
+{% load filter%}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Lora&family=Nunito&family=Ysabeau&display=swap"
+          rel="stylesheet">
+</head>
+<body>
+<div class="header">
+    <div class="left_header">
+        <a href="{% url 'home' %}"><img class="header_logo"
+             src="{% static 'img/[CITYPNG.COM]HD Dota 2 Logo White Text With Symbol PNG - 2000x2000.png'%}" alt=""></a>
+    </div>
+    <div class="right_header">
+        <div class="header_item">
+            <a href="{% url 'list_articles'%}" class="header_text"><p>Статьи</p></a>
+        </div>
+        <div class="header_item">
+            <a href="" class="header_text"><p>О нас</p></a>
+        </div>
+        <div class="header_item">
+            <a href="" class="header_text"><p>Вход</p></a>
+        </div>
+    </div>
+</div>
+<div class="articles_container">
+    <form class="search_form" action="{% url 'list_articles' %}">
+        <div class="search" style="display: inline-flex; width: 100%">
+            <input name="search" class="search_input" type="text" placeholder="Поиск">
+        </div>
+    </form>
+    {% for article in articles %}
+    <div class="article_block">
+        <div class="article_photo">
+            <img class="article_img" src="{{article.image.url}}" alt="">
+        </div>
+        <div class="article_content">
+            <div class="article_author">
+                <p>{{article.author.username}}/{{article.created_at}}</p>
+            </div>
+            <div class="article_title">
+                <h1>{{article.title}}</h1>
+            </div>
+            <div class="article_description">
+                <p>{{article.content|check_len}}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</body>
+</html>

@@ -7,10 +7,14 @@ from blog.models import Article, User, Like, Comment
 
 class RenderMainPageView(View):
     def get(self, request, *args, **kwargs):
+        return render(request, "new/base.html")
+
+class RenderArticlesListView(View):
+    def get(self, request, *args, **kwargs):
         articles = Article.objects.all()
         if request.GET.get('search'):
             articles = articles.filter(title__icontains=request.GET.get('search'))
-        return render(request, "blog/main_page.html", context={
+        return render(request, "new/main_page.html", context={
             'articles': articles
         })
 
